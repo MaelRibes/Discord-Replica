@@ -1,0 +1,52 @@
+version: '3'
+
+networks:
+  discord-replica:
+
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - discord-replica
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - discord-replica
+
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app/Backend
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://mongodb:27017/myDatabase
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - mongodb
+      - redis
+    networks:
+      - discord-replica
+
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app/Frontend
+    environment:
+      - NODE_ENV=development
+    networks:
+      - discord-replica
+
+
