@@ -61,7 +61,7 @@ def create_app():
 app = create_app()
 
 # Config la ddb
-mongo = db.config_db(app, "myDatabase")
+mongo = db.config_db(app, "DiscordReplicaDB")
 
 #Serveur redis
 r = redis.Redis()

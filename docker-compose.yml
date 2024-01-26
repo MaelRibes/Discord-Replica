@@ -1,15 +1,42 @@
-version: '3'
-
-networks:
-  discord-replica:
+version: '3.8'
 
 services:
-  mongodb:
+  mongodb_primary:
+    container_name: mongodb_primary
     image: mongo
-    ports:
-      - "27017:27017"
+    volumes:
+      - ./data/db_primary:/data/db
+      - ./scripts/init-replica-set.sh:/scripts/init-replica-set.sh
     networks:
       - discord-replica
+    ports:
+      - "27017:27017"
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
+
+  mongodb_secondary1:
+    container_name: mongodb_secondary1
+    image: mongo
+    volumes:
+      - ./data/db_secondary1:/data/db
+    networks:
+      - discord-replica
+    ports:
+      - "27018:27017"
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
+
+  mongodb_secondary2:
+    container_name: mongodb_secondary2
+    image: mongo
+    volumes:
+      - ./data/db_secondary2:/data/db
+    networks:
+      - discord-replica
+    ports:
+      - "27019:27017"
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
 
   redis:
     image: redis
@@ -28,10 +55,12 @@ services:
       - .:/app/Backend
     environment:
       - NODE_ENV=development
-      - MONGO_URI=mongodb://mongodb:27017/myDatabase
+      - MONGO_URI=mongodb://mongodb_primary:27017,mongodb_secondary1:27018,mongodb_secondary2:27019/DiscordReplicaDB?replicaSet=rs0
       - REDIS_URL=redis://redis:6379
     depends_on:
-      - mongodb
+      - mongodb_primary
+      - mongodb_secondary1
+      - mongodb_secondary2
       - redis
     networks:
       - discord-replica
@@ -49,4 +78,7 @@ services:
     networks:
       - discord-replica
 
+networks:
+  discord-replica:
+    driver: bridge
 

@@ -2,7 +2,7 @@ from flask_pymongo import PyMongo
 from models import User, UserRepository, ServerRepository, Server, Member, Channel, Message
 
 def config_db(app, db_name):
-    app.config["MONGO_URI"] = f"mongodb://mongodb:27017/{db_name}"
+    app.config["MONGO_URI"] = f"mongodb://mongodb_primary:27017,mongodb_secondary1:27018,mongodb_secondary2:27019/{db_name}?replicaSet=rs0"
     mongo = PyMongo(app)
     return mongo
 
