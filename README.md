@@ -197,7 +197,6 @@ Prerequisites:
 - Have Docker installed
 
 Installation:
-- Open a terminal at the root of the project and run `docker-compose build` 
-- Run `docker-compose up` to launch the application on `localhost:3000`
+- Open a terminal at the root of the project and run `start.sh`. This should build the Mongo, Redis, backend, and frontend containers, and start the application on `localhost:3000`.
 
 **Note**: Do not refresh the page while the application is running, or there will be socket bugs.
