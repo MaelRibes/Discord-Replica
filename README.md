@@ -1,4 +1,4 @@
-# Discord Replicat
+# Discord Replica
 
 NICOLAS Thomas, RIBES Maël, SIMONET Théo
 
