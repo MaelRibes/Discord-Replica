@@ -4,6 +4,12 @@ NICOLAS Thomas, RIBES Maël, SIMONET Théo
 
 This project was completed as a group effort. The objective was to create a chat application that mimics the functionality of Discord. This means a user can join multiple servers, each containing several topic-centered channels that serve as chat rooms. It is also possible to add users as friends for private communication.
 
+[![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://react.dev)
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/fr-fr)
+[![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)](https://redis.io/)
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com)
+
 # Architecture
 
 ## Structure
@@ -37,7 +43,7 @@ For the frontend, we use the React JS library to build our UI. React communicate
 
 Our Python backend implements the `pydantic_mongo` library to define models corresponding to our data and use repositories to communicate with our MongoDB database. Finally, we use a second Redis database to hot-store user connections and determine if a user is presumably connected or not.
 
-## MongoDB
+## MongoDB 
 
 Data is structured as follows:
 - a `server` collection for servers.
@@ -113,6 +119,14 @@ Upon disconnection, the user's key is deleted to indicate they are no longer con
 ```python
 r.delete(socketio.server.get_session(sid).get('username')) # Removing the entry corresponding to the user
 ```
+
+## Docker
+
+After our application was fully functional and all the desired features were working correctly, we decided to dockerize the project. Dockerizing an application offers numerous benefits. Firstly, it ensures consistency across different environments, as Docker containers encapsulate the application and its environment. This eliminates the often-heard issue of "it works on my machine." By dockerizing, we guaranteed that the application would run the same way regardless of where it is deployed.
+
+To dockerize our project, we first needed to build Docker images for our backend and frontend. We created a Dockerfile at the root of the backend and frontend directories for this purpose. These Dockerfiles are crucial as they automatically download the dependencies for the backend and frontend and then launch them. This automation streamlines the setup process, making it faster and more error-resistant.
+
+Once the backend and frontend images were created, we proceeded to develop a `docker-compose.yml` file. This file plays a key role in orchestrating the application, as it is used to create, configure, and launch containers for all the application's services, including the backend, frontend, Redis, and MongoDB. Docker-compose not only simplifies the deployment process but also makes it easier to manage and scale the application's components. This comprehensive approach ensures a cohesive and efficient deployment, enhancing both development and operational efficiency.
 
 # ReplicaSet
 
