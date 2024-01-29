@@ -74,9 +74,9 @@ volumes:
 rs.initiate({
   _id: "rs0",
   members: [
-    { _id: 0, host: "mongo_primary:27017" },
-    { _id: 1, host: "mongo_secondary1:27017" },
-    { _id: 2, host: "mongo_secondary2:27017" }
+     { _id : 0, host : 'mongodb_primary:27017', priority: 3}, 
+     { _id : 1, host : 'mongodb_secondary1:27017', priority: 2 },
+     { _id : 2, host : 'mongodb_secondary2:27017', priority: 1 }
   ]
 });
 ```
