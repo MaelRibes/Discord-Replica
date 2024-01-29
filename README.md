@@ -53,6 +53,20 @@ For the frontend, we use the React JS library to build our UI. React communicate
 
 Our Python backend implements the `pydantic_mongo` library to define models corresponding to our data and use repositories to communicate with our MongoDB database. Finally, we use a second Redis database to hot-store user connections and determine if a user is presumably connected or not.
 
+## Routes
+
+| Route              | Method | Description          |
+|--------------------|--------|----------------------|
+| `/api/server`      | GET    | Get a server         |
+| `/api/server`      | POST   | Add a server         |
+| `/api/server`      | PUT    | Update a server      |
+| `/api/user`        | GET    | Get a user           |
+| `/api/user`        | POST   | Create a user        |
+| `/api/user/login`  | POST   | User connection      |
+| `/api/chat`        | GET    | Get private message  |
+| `/api/friend`      | POST   | Add a friend         |
+| `/api/get_user_redis` | GET    | Get a redis user     |
+
 ## MongoDB 
 
 Data is structured as follows:
@@ -223,6 +237,6 @@ Prerequisites:
 - Have Docker installed
 
 Installation:
-- Open a terminal at the root of the project and run `start.sh`. This should build the Mongo, Redis, backend, and frontend containers, and start the application on `localhost:3000`.
+- Open a terminal at the root of the project and run `./start.sh`. This should build the Mongo, Redis, backend, and frontend containers, and start the application on `localhost:3000`.
 
 **Note**: Do not refresh the page while the application is running, or there will be socket bugs.
