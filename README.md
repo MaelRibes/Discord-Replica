@@ -33,10 +33,6 @@ This project was completed as a group effort. The objective was to create a chat
 │  ├─ 📝 Dockerfile  # Dockerization of the Backend
 │  ├─ 📝 models.py  # ORM models for MongoDB
 │  └─ 📝 tests.py   # Database tests
-├─ 📁 data 
-│  ├─ 📁 db_primary   
-│  ├─ 📁 db_secondary1   # Folder to back up locally the DB
-│  └─ 📁 db_secondary2
 ├─ 📁 scripts
 │  └─ 📝 init-replica-set.sh   # Initialization of the replica set
 ├─ 📁 infos
@@ -44,14 +40,17 @@ This project was completed as a group effort. The objective was to create a chat
 ├─ 📝 docker-compose.yml   # Create, configure, and launch containers
 └─ 📝 start.sh   # Script to launch the application (launch docker compose and initialize replica set)
 ```
+## System context
+
+![system_context](imgs_readme/system_context.png)
 
 ## Technologies
-
-![architecture](imgs_readme/architecture.PNG)
 
 For the frontend, we use the React JS library to build our UI. React communicates with our Python Backend through API calls to fetch database information, as well as through websockets enabling real-time UI updates, such as handling new messages.
 
 Our Python backend implements the `pydantic_mongo` library to define models corresponding to our data and use repositories to communicate with our MongoDB database. Finally, we use a second Redis database to hot-store user connections and determine if a user is presumably connected or not.
+
+![container](imgs_readme/container.png)
 
 ## Routes
 
@@ -129,6 +128,8 @@ class Server(BaseModel):
 Private conversations are managed as follows:
 - A private conversation is a server named username1_username2 without an administrator and with a single channel.
 
+![classes](imgs_readme/classes.jpg)
+
 ## Redis
 
 To know if a user is connected or not, each user connection sets the user's name key to 1 in Redis.
@@ -193,18 +194,6 @@ rs.addArb("localhost:30000")
 
 Since our project is already containerized with Docker, we can take advantage of this to automate the launch of the replica set. The tutorial **[replica_set_tutorial.md](Replica_Set_Tutorial.md)** explains step by step how to initialize a MongoDB replica set with Docker. It closely follows what we used in the project.
 
-# Developed Features
-
-- User connections
-- Server management
-- Real-time display of connected users indicated by the circle next to a user's username
-- Management of rooms within a server
-- Friends list
-- Private conversations
-- Verifications (checking login fields, can't add the same user twice to a server or as a friend, uniqueness of private conversations between two users)
-- Server and user stats
-- MongoDB database Replica set
-- Docker containerization of the project
 
 # Stats
 
@@ -220,6 +209,26 @@ Then the users who send the most messages from MongoDB and an aggregates pipelin
 Finally, the servers with the most messages, still with MongoDB:
 
 ![Stats](imgs_readme/stats_servers.PNG)
+
+# Component Diagrams
+
+![component_front](imgs_readme/component_front.png)
+![component_back](imgs_readme/component_back.png)
+![component_redis](imgs_readme/component_redis.png)
+
+# Developed Features
+
+- User connections
+- Server management
+- Real-time display of connected users indicated by the circle next to a user's username
+- Management of rooms within a server
+- Friends list
+- Private conversations
+- Verifications (checking login fields, can't add the same user twice to a server or as a friend, uniqueness of private conversations between two users)
+- Server and user stats
+- MongoDB database Replica set
+- Docker containerization of the project
+
 
 # Acquired Skills
 
