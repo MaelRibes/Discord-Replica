@@ -10,6 +10,19 @@ This project was completed as a group effort. The objective was to create a chat
 [![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)](https://redis.io/)
 [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com)
 
+## Developed Features
+
+- User connections
+- Server management
+- Real-time display of connected users indicated by the circle next to a user's username
+- Management of rooms within a server
+- Friends list
+- Private conversations
+- Verifications (checking login fields, can't add the same user twice to a server or as a friend, uniqueness of private conversations between two users)
+- Server and user stats
+- MongoDB database Replica set
+- Docker containerization of the project
+
 # Architecture
 
 ## Structure
@@ -215,19 +228,6 @@ Finally, the servers with the most messages, still with MongoDB:
 ![component_front](imgs_readme/component_front.png)
 ![component_back](imgs_readme/component_back.png)
 ![component_redis](imgs_readme/component_redis.png)
-
-# Developed Features
-
-- User connections
-- Server management
-- Real-time display of connected users indicated by the circle next to a user's username
-- Management of rooms within a server
-- Friends list
-- Private conversations
-- Verifications (checking login fields, can't add the same user twice to a server or as a friend, uniqueness of private conversations between two users)
-- Server and user stats
-- MongoDB database Replica set
-- Docker containerization of the project
 
 
 # Acquired Skills
