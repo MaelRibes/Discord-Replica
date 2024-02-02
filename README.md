@@ -2,7 +2,7 @@
 
 NICOLAS Thomas, RIBES Maël, SIMONET Théo
 
-This project was completed as a group effort. The objective was to create a chat application that mimics the functionality of Discord. This means a user can join multiple servers, each containing several topic-centered channels that serve as chat rooms. It is also possible to add users as friends for private communication.
+This project was completed as a group effort. The objective was to create a chat application that mimics the functionality of Discord. This means a user can join multiple servers, each containing several topic-centered channels that serve as chat rooms. It is also possible to add users as friends for private communication. 
 
 [![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://react.dev)
 [![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
